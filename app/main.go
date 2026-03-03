@@ -13,15 +13,17 @@ var _ = fmt.Print
 func main() {
 	reader := bufio.NewReader(os.Stdin)
 
-	fmt.Print("$ ")
+	for {
+		fmt.Print("$ ")
 
-	command, err := reader.ReadString('\n')
-	if err != nil {
-		fmt.Println("Error reading input:", err)
-		os.Exit(1)
+		command, err := reader.ReadString('\n')
+		if err != nil {
+			fmt.Println("Error reading input:", err)
+			os.Exit(1)
+		}
+		command = strings.TrimSpace(command)
+
+		fmt.Printf("%s: command not found\n", command)
 	}
-	command = strings.TrimSpace(command)
-
-	fmt.Printf("%s: command not found", command)
 
 }
