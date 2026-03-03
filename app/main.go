@@ -25,11 +25,11 @@ func commandParsing(command string) (string, string) {
 func handleTypePrint(command string) {
 	switch command {
 	case "echo":
-		fmt.Printf("%s: command is a shell builtin\n", command)
+		fmt.Printf("%s: is a shell builtin\n", command)
 	case "exit":
-		fmt.Printf("%s: command is a shell builtin\n", command)
+		fmt.Printf("%s: is a shell builtin\n", command)
 	case "type":
-		fmt.Printf("%s: command is a shell builtin\n", command)
+		fmt.Printf("%s: is a shell builtin\n", command)
 	default:
 		fmt.Printf("%s: not found\n", command)
 	}
