@@ -53,6 +53,13 @@ func main() {
 			handleTypePrint(args[0])
 		case "echo":
 			fmt.Printf("%s\n", strings.Join(args, " "))
+		case "pwd":
+			dir, err := os.Getwd()
+			if err != nil {
+				fmt.Println("Error:", err)
+				continue
+			}
+			fmt.Println(dir)
 		case "exit":
 			os.Exit(0)
 		default:
