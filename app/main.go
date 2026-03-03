@@ -23,6 +23,10 @@ func main() {
 		}
 		command = strings.TrimSpace(command)
 
+		parts := strings.Fields(command)
+
+		command = parts[0]
+
 		if command=="exit" {
 			os.Exit(0)
 		}
