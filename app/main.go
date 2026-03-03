@@ -7,8 +7,33 @@ import (
 	"strings"
 )
 
-// Ensures gofmt doesn't remove the "fmt" import in stage 1 (feel free to remove this!)
-var _ = fmt.Print
+func commandParsing(command string) (string, string) {
+	command = strings.TrimSpace(command)
+
+	parts := strings.Fields(command)
+
+	command = parts[0]
+
+	var args string
+	if len(parts) > 1 {
+		args = strings.Join(parts[1:], " ")
+	}
+
+	return command, args
+}
+
+func handleTypePrint(command string) {
+	switch command {
+	case "echo":
+		fmt.Printf("%s: command is a shell builtin\n", command)
+	case "exit":
+		fmt.Printf("%s: command is a shell builtin\n", command)
+	case "type":
+		fmt.Printf("%s: command is a shell builtin\n", command)
+	default:
+		fmt.Printf("%s: not found\n", command)
+	}
+}
 
 func main() {
 	reader := bufio.NewReader(os.Stdin)
@@ -21,27 +46,20 @@ func main() {
 			fmt.Println("Error reading input:", err)
 			os.Exit(1)
 		}
-		command = strings.TrimSpace(command)
 
-		parts := strings.Fields(command)
+		command, args := commandParsing(command)
 
-		command = parts[0]
-
-		var args string
-		if len(parts) > 1 {
-			args = strings.Join(parts[1:], " ")
-		}
-
-		if command == "exit" {
-			os.Exit(0)
-		}
-
-		if command == "echo" {
+		switch command {
+		case "type":
+			cmd, _ := commandParsing(args)
+			handleTypePrint(cmd)
+		case "echo":
 			fmt.Printf("%s\n", args)
-			continue
+		case "exit":
+			os.Exit(0)
+		default:
+			fmt.Printf("%s: command not found\n", command)
 		}
-
-		fmt.Printf("%s: command not found\n", command)
 	}
 
 }
