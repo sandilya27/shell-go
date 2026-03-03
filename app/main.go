@@ -27,8 +27,18 @@ func main() {
 
 		command = parts[0]
 
-		if command=="exit" {
+		var args string
+		if len(parts) > 1 {
+			args = strings.Join(parts[1:], " ")
+		}
+
+		if command == "exit" {
 			os.Exit(0)
+		}
+
+		if command == "echo" {
+			fmt.Printf("%s\n", args)
+			continue
 		}
 
 		fmt.Printf("%s: command not found\n", command)
