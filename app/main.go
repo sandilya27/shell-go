@@ -22,7 +22,7 @@ func commandParsing(command string) (string, []string) {
 
 func handleTypePrint(command string) {
 	switch command {
-	case "echo", "exit", "type":
+	case "echo", "exit", "type", "pwd":
 		fmt.Printf("%s is a shell builtin\n", command)
 	default:
 		path, err := exec.LookPath(command)
