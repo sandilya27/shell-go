@@ -36,7 +36,7 @@ func handleTypePrint(command string) {
 		if err != nil {
 			fmt.Printf("%s: not found", command)
 		}
-		fmt.Printf("%s is %s",command,path)
+		fmt.Printf("%s is %s\n",command,path)
 	}
 }
 
