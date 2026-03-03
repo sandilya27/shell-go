@@ -18,7 +18,7 @@ func main() {
 	command, err := reader.ReadString('\n')
 	if err != nil {
 		fmt.Println("Error reading input:", err)
-		return
+		os.Exit(1)
 	}
 	command = strings.TrimSpace(command)
 
