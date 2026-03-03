@@ -22,6 +22,6 @@ func main() {
 	}
 	command = strings.TrimSpace(command)
 
-	fmt.Printf("{%s}: command not found", command)
+	fmt.Printf("%s: command not found", command)
 
 }
