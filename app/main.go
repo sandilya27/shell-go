@@ -8,19 +8,16 @@ import (
 	"strings"
 )
 
-func commandParsing(command string) (string, string) {
+func commandParsing(command string) (string, []string) {
 	command = strings.TrimSpace(command)
 
 	parts := strings.Fields(command)
 
-	command = parts[0]
-
-	var args string
-	if len(parts) > 1 {
-		args = strings.Join(parts[1:], " ")
+	if len(parts) == 0 {
+		return "", nil
 	}
 
-	return command, args
+	return parts[0], parts[1:]
 }
 
 func handleTypePrint(command string) {
@@ -33,7 +30,7 @@ func handleTypePrint(command string) {
 			fmt.Printf("%s: not found\n", command)
 			return
 		}
-		fmt.Printf("%s is %s\n",command,path)
+		fmt.Printf("%s is %s\n", command, path)
 	}
 }
 
@@ -53,14 +50,21 @@ func main() {
 
 		switch command {
 		case "type":
-			cmd, _ := commandParsing(args)
-			handleTypePrint(cmd)
+			handleTypePrint(args[0])
 		case "echo":
-			fmt.Printf("%s\n", args)
+			fmt.Printf("%s\n", strings.Join(args, " "))
 		case "exit":
 			os.Exit(0)
 		default:
-			fmt.Printf("%s: command not found\n", command)
+			cmd := exec.Command(command, args...)
+			cmd.Stdout = os.Stdout
+			cmd.Stderr = os.Stderr
+			cmd.Stdin = os.Stdin
+
+			err := cmd.Run()
+			if err != nil {
+				fmt.Printf("%s: command not found\n", command)
+			}
 		}
 	}
 
