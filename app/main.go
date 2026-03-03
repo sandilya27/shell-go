@@ -25,11 +25,7 @@ func commandParsing(command string) (string, string) {
 
 func handleTypePrint(command string) {
 	switch command {
-	case "echo":
-		fmt.Printf("%s is a shell builtin\n", command)
-	case "exit":
-		fmt.Printf("%s is a shell builtin\n", command)
-	case "type":
+	case "echo", "exit", "type":
 		fmt.Printf("%s is a shell builtin\n", command)
 	default:
 		path, err := exec.LookPath(command)
